@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Home</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static' ,filename='css/colors.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static' ,filename='css/bootstrap.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static' ,filename='css/style.css')}}">
+    <script type="text/javascript">
+        function liked(x) {
+            let div_id="div_"+x.toString()
+            let z=document.getElementById(div_id);
+            if(z.style.boxShadow=="10px 10px")
+                z.style.boxShadow="0px 0px";
+            else
+                z.style.boxShadow="10px 10px";
+            let btn_id="btn_"+x.toString()
+            let z1=document.getElementById(btn_id);
+            if(z1.style.color=="red")
+                z1.style.color="white";
+            else
+                z1.style.color="red";
+        }
+    </script>
+</head>
+<body >
+<div class="container-fluid">
+    <div class="nav navbar-expand-md navbar-dark bg-dark fixed-top" role="navigation">
+        <a class="navbar-brand text-white ml-2">
+            <img class="img-fluid" src="{{ url_for('static',filename=data.prflpic) }}" style="border-radius: 50%;" width="50px" height="50px">
+            {{ data.username }}
+        </a>
+        <button type="button" class="navbar-toggler ml-auto" data-toggle="collapse" data-target="#menubar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse ml-5" id="menubar">
+            <nav class="navbar-nav">
+                <a href="{{ url_for('home',rno=data.rno) }}" class="nav-item nav-link active">Home</a>
+                <a href="{{ url_for('profile',rno=data.rno) }}" class="nav-item nav-link">Profile</a>
+                <a href="{{ url_for('findfriends',rno=data.rno) }}" class="nav-item nav-link">Find Friends</a>
+                <a href="{{ url_for('notification',rno=data.rno) }}" class="nav-item nav-link">Notifications</a>
+                <a href="{{ url_for('message',rno=data.rno,orno=1604310029) }}" class="nav-item nav-link">Messages</a>
+                <a href="{{ url_for('logout') }}" class="nav-item nav-link">Logout</a>
+            </nav>
+            <form class="form-check-inline my-2 my-lg-0 ml-auto" method="post" action="{{ url_for('search',rno=data.rno) }}">
+                <input class="form-control text-center" placeholder="Search" type="text" name="searchd">
+                <button class="btn" type="submit" ><img src="{{ url_for('static',filename='images/searchlogo.png') }}" height="25px" width="25px"/></button>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="container-fluid" style="padding-top: 60px;">
+    <div class="row">
+        <div class="col-lg-2 bg-info d-none d-sm-none d-md-block">
+            <div class=" position-fixed" style="overflow-y: auto;height: 100%;padding-right: 30px;margin-right: 30px;">
+                <p>{{ data.name }}</p>
+                <p>{{ data.rno }}</p>
+                <p>{{ data.sex }}</p>
+                <p>{{ data.age }}</p>
+                <p>{{ data.year }}</p>
+                <p>{{ data.DOB }}</p>
+                <p>{{ data.DOJ }}</p>
+                <p>{{ data.branch }}</p>
+                <p>{{ data.username }}</p>
+                <p>{{ data.email }}</p>
+            </div>
+        </div>
+        <div class="col-lg-8 cbox rounded">
+            <div class="media m-2">
+                <img src="{{ url_for('static',filename=data.prflpic) }}" style="border-radius: 50%;" height="100" width="100" class="img-fluid mr-5">
+                <div class="media-body">
+                    <h5>{{ data.username }}</h5>
+                    <form class="form-group">
+                        <input type="text" class="form-control rounded" name="post" style="height: 100px">
+                        <button type="button" class="btn btn-light float-right m-1" value="submit">POST</button>
+                    </form>
+                </div>
+
+            </div>
+            <div class="row">
+                    {% for i in range(20) %}
+                    <div class="media m-2 border rounded dbox" id="div_{{ i }}">
+                        <img src="{{ url_for('static',filename=data.prflpic) }}" style="border-radius: 50%;" height="100" width="100" class="img-fluid mr-5">
+                        <div class="media-body rounded">
+                            <h5>{{ data.username }}</h5>
+                            <p>
+                                The rose is a flower of love.
+                                The world has acclaimed it for centuries. Pink roses are for love hopeful and expectant.
+                                White roses are for love dead or forsaken, but the red roses, ah the red roses are for love triumphant.
+                            </p>
+                            <br/>
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <button type="button" id="btn_{{ i }}" class="btn btn-primary" onclick="liked({{ i }})" value="LIKE">LIKE</button>
+                                </div>
+                                <div class="col-sm-4">
+                                    <button type="button" class="btn btn-primary" value="COMMENT">COMMENT</button>
+                                </div>
+                                <div class="col-sm-4">
+                                    <button type="button" class="btn btn-primary" value="SHARE">SHARE</button>
+                                </div>
+                            </div>
+                            <br/>
+                            <div class="media">
+                            <img src="{{ url_for('static',filename=data.prflpic) }}" style="border-radius: 50%;" height="50px" width="50px" class="img-fluid mr-5">
+                            <div class="media-body mb-2 float-right">
+                                <h5>{{ data.username }}</h5>
+                                <form class="form-check-inline my-2 my-lg-0 ml-auto">
+                                    <input class="form-control text-center"  type="text">
+                                    <button class="btn btn-primary" type="button">COMMENT</button>
+                                </form>
+                            </div>
+                        </div>
+                        </div>
+
+                    </div>
+                        <br/>
+                    {% endfor %}
+            </div>
+        </div>
+        <div class="col-lg-2 bg-warning  d-none d-sm-none d-md-block">
+            <div class=" position-fixed" style="overflow-y: auto;height: 100%;padding-right: 30px;margin-right: 30px;">
+                <p>{{ data.name }}</p>
+                <p>{{ data.rno }}</p>
+                <p>{{ data.sex }}</p>
+                <p>{{ data.age }}</p>
+                <p>{{ data.year }}</p>
+                <p>{{ data.DOB }}</p>
+                <p>{{ data.DOJ }}</p>
+                <p>{{ data.branch }}</p>
+                <p>{{ data.username }}</p>
+                <p>{{ data.email }}</p>
+                <p>{{ data.prflpic }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="{{ url_for('static' ,filename='js/popper.js')}}"></script>
+<script type="text/javascript" src="{{ url_for('static' ,filename='js/jquery.js')}}"></script>
+<script type="text/javascript" src="{{ url_for('static' ,filename='js/bootstrap.min.js')}}"></script>
+</body>
+</html>

@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>BIETcoders</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static' ,filename='css/colors.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static' ,filename='css/bootstrap.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static' ,filename='css/style.css')}}">
+</head>
+<body >
+
+
+<! Start Header >
+<div class="container-fluid">
+
+    <div class="row cbox">
+        <div class="col-sm-12" width="100%" style="height:6px;">
+        </div>
+    </div>
+    <div class="row bbox">
+        <div class="col-sm-8">
+            <div class="row text-center">
+                <div class="col-lg-3">
+                    <img src="{{ url_for('static' , filename='images/bietcoderlogo.PNG') }}" class="img-fluid" height="150px" width="150px">
+                </div>
+                <div class="col-lg-9">
+                    <h1 class="text-white font-weight-bold font-italic font-me">BIETcoders</h1>
+                    <h5 class="float-right font-italic" style="font-family: Verdana;">...The Student Connection</h5>
+                </div>
+            </div>
+
+        </div>
+         <div class="col-sm-4">
+            <form style="margin:10px; " method="post" action="{{ url_for('login') }}">
+                <div class="form-group">
+                    <input type="text" class="form-control  text-center" placeholder="Enter Username" name="username">
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control  text-center" placeholder="Password" name="password">
+                </div>
+                {% with messages =get_flashed_messages() %}
+
+                {% if messages[0]=='failed' %}
+
+                    <small>Incorrect username or password</small>
+                {% endif %}
+                {% endwith %}
+                <div class="row">
+                    <div class="col-lg-6">
+                    <a class="form-control text-center" style="margin-bottom: 10px;" href="{{ url_for('forget') }}">Forget?</a>
+                    </div>
+                    <div class="col-lg-6">
+                    <button type="submit" class="form-control">Login</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="row cbox">
+        <div class="col-sm-12" width="100%" style="height:6px;">
+        </div>
+    </div>
+</div>
+
+<! End Header >
+
+
+<! Start Body >
+{% with messages =get_flashed_messages() %}
+
+{% if messages[0]=='true' %}
+
+    <h1 class="bg-primary"><marquee>Signup Successful, Login Please!!!</marquee></h1>
+{% endif %}
+{% if messages[0]=='false' %}
+    <h1 class="bg-primary"><marquee>Account Exist, Login Please!!!</marquee></h1>
+{% endif %}
+{% endwith %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-9">
+            <img src="{{ url_for('static' ,filename='images/prmtlogo.jpeg')}}" class="img-fluid rounded"/>
+        </div>
+        <div class="col-sm-3 cbox">
+            <h1 class="text-center text-black-50">Signup</h1>
+            <form style="margin:10px;" method="post" action="{{ url_for('signup') }}">
+                <div class="form-group">
+                    <input type="text" class="form-control  text-center" placeholder="Rollno" name="rno">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control  text-center" placeholder="Name" name="name">
+                </div>
+                <div class="form-inline form-control  mb-3">
+                    <label class="ml-3 mr-2">Gender : </label>
+                    <div class="custom-control custom-radio  mr-2">
+                      <input type="radio" class="custom-control-input" id="mid" name="sex" value="male" >
+                      <label class="custom-control-label" for="mid">Male</label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                      <input type="radio" class="custom-control-input" id="fid" name="sex" value="female">
+                      <label class="custom-control-label" for="fid">Female</label>
+                    </div>
+                </div>
+                <div class="form-group form-control ">
+                    <label class="ml-3 mr-2" >DOB : </label>
+                    <input class="text-center border-0" name="dob" type="date" value="1998-01-01">
+                </div>
+                <div class="form-group">
+                    <input type="email" class="form-control  text-center" placeholder="Email" name="email">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control  text-center" placeholder="Username" name="username">
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control  text-center" placeholder="Password" name="password">
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                    <button type="submit" class="btn-primary form-control" value="submit" name="submit">Signup</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<! End Body >
+
+
+<! Start Footer >
+
+
+<div class="container-fluid">
+    <div class="row cbox">
+        <div class="col-sm-12" width="100%" style="height:6px;">
+        </div>
+    </div>
+    <div class="row bbox text-center">
+        <div class="col-lg-3 text-center text-white">
+            <div class="row">
+                <div class="col-sm-12">
+                    <h1>Contact Us:</h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <h1>+91XXXXXXXXXX</h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <h1>+91XXXXXXXXXX</h1>
+                </div>
+            </div>
+        </div>
+        <hr class="d-xl-none d-lg-none cbox" style="width: 100%; height: 1px;" />
+        <div class="col-lg-7 text-center text-white">
+            <div class="row">
+                <div class="col-sm-12">
+                    <h1>Email Us:</h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <h1><a href = "mailto: help@bietcoders.com" class="text-white d-sm-none d-md-block d-lg-block d-xl-block d-none">help@bietcoders.com</a></h1>
+                    <h1><a href = "mailto: help@bietcoders.com" class="text-white d-sm-block d-md-none d-lg-none d-xl-none">help</a></h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <h1><a href = "mailto: support@bietcoders.com" class="text-white d-sm-none d-md-block d-lg-block d-xl-block d-none">support@bietcoders.com</a></h1>
+                    <h1><a href = "mailto: support@bietcoders.com" class="text-white d-sm-block d-md-none d-lg-none d-xl-none">support</a></h1>
+                </div>
+            </div>
+        </div>
+        <hr class="d-xl-none d-lg-none cbox" style="width: 100%; height: 1px;" />
+        <div class="col-lg-2 text-center text-white">
+            <div class="row">
+                <div class="col-sm-12">
+                    <h1>Like & Follow Us:</h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <a href = "https://www.facebook.com/WACLOVE/"><img src="{{ url_for('static' ,filename='images/fb.png')}}" style="border-radius: 50%;" class="img-fluid" height="40rem" width="40rem"> </a>
+                    <a href = "https://www.facebook.com/WACLOVE/"><img src="{{ url_for('static' ,filename='images/g+.png')}}" style="border-radius: 50%;" class="img-fluid" height="40rem" width="40rem"> </a>
+                    <a href = "https://www.facebook.com/WACLOVE/"><img src="{{ url_for('static' ,filename='images/twitter.png')}}" style="border-radius: 50%; z-index: 100; " class="img-fluid" height="40rem" width="40rem"> </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row cbox">
+        <div class="col-sm-12" width="100%" style="height:6px;">
+        </div>
+    </div>
+</div>
+
+<! End Footer >
+
+
+<script type="text/javascript" src="{{ url_for('static' ,filename='js/popper.js')}}"></script>
+<script type="text/javascript" src="{{ url_for('static' ,filename='js/jquery.js')}}"></script>
+<script type="text/javascript" src="{{ url_for('static' ,filename='js/bootstrap.min.js')}}"></script>
+</body>
+</html>

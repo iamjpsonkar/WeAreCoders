@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Profile</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static' ,filename='css/colors.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static' ,filename='css/bootstrap.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static' ,filename='css/style.css')}}">
+    <script type="text/javascript">
+        function liked(x) {
+            let div_id="div_"+x.toString()
+            let z=document.getElementById(div_id);
+            if(z.style.boxShadow=="10px 10px")
+                z.style.boxShadow="0px 0px";
+            else
+                z.style.boxShadow="10px 10px";
+            let btn_id="btn_"+x.toString()
+            let z1=document.getElementById(btn_id);
+            if(z1.style.color=="red")
+                z1.style.color="white";
+            else
+                z1.style.color="red";
+        }
+        function dispc(obj)
+        {
+            let k1=document.getElementById("div_abtu");
+            let k2=document.getElementById("abtu");
+            k1.style.display="none";
+            k2.style.backgroundColor="#2ec891";
+
+
+            k1=document.getElementById("div_tmu");
+            k2=document.getElementById("tmu");
+            k1.style.display="none";
+            k2.style.backgroundColor="#2ec891";
+
+            k1=document.getElementById("div_frndu");
+            k2=document.getElementById("frndu");
+            k1.style.display="none";
+            k2.style.backgroundColor="#2ec891";
+
+            k1=document.getElementById("div_pstu");
+            k2=document.getElementById("pstu");
+            k1.style.display="none";
+            k2.style.backgroundColor="#2ec891";
+
+
+            let div_id="div_"+obj.id.toString();
+            let cov_id=obj.id.toString();
+            let x = document.getElementById(div_id);
+            x.style.display="block";
+            let y=document.getElementById(cov_id)
+            y.style.backgroundColor="#f8f9fa";
+        }
+    </script>
+</head>
+<body class="cbox" >
+<div class="container-fluid">
+    <div class="fixed-top">
+        <div class="nav navbar-expand-md navbar-dark bg-dark" role="navigation">
+            <a class="navbar-brand text-white ml-2">
+                <img class="img-fluid" style="border-radius: 50%;" src="{{ url_for('static',filename=data.prflpic) }}" width="50px" height="50px">
+                {{ data.username }}
+            </a>
+            <button type="button" class="navbar-toggler ml-auto" data-toggle="collapse" data-target="#menubar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse ml-5" id="menubar">
+                <nav class="navbar-nav">
+                    <a href="{{ url_for('home',rno=data.rno) }}" class="nav-item nav-link">Home</a>
+                    <a href="{{ url_for('profile',rno=data.rno) }}" class="nav-item nav-link active">Profile</a>
+                    <a href="{{ url_for('findfriends',rno=data.rno) }}" class="nav-item nav-link">Find Friends</a>
+                    <a href="{{ url_for('notification',rno=data.rno) }}" class="nav-item nav-link">Notifications</a>
+                    <a href="{{ url_for('message',rno=data.rno,orno=1604310029) }}" class="nav-item nav-link">Messages</a>
+                    <a href="{{ url_for('logout') }}" class="nav-item nav-link">Logout</a>
+                </nav>
+                <form class="form-check-inline my-2 my-lg-0 ml-auto" method="post" action="{{ url_for('search',rno=data.rno) }}">
+                    <input class="form-control text-center" placeholder="Search" type="text" name="searchd">
+                    <button class="btn" type="submit" ><img src="{{ url_for('static',filename='images/searchlogo.png') }}" height="25px" width="25px"/></button>
+                </form>
+            </div>
+        </div>
+        <div class="row" style="border:0px;background-image: url('{{ url_for('static',filename='images/head.gif') }}');height: 40%;border-bottom-left-radius: 3%;border-bottom-right-radius: 3%" >
+                <div class="col-sm-2">
+                    <img src="{{ url_for('static',filename=data.prflpic)}}" height="200px" width="200px" class="img-fluid" style="border-radius: 50%;margin-top: 10%"/>
+                </div>
+                <div class="col-sm-4" style="margin-top: auto;margin-left: 0px;">
+                    <h2>{{ data.name }}</h2>
+                </div>
+                <div class="col-sm-6">
+
+                </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid"  style="margin-top: 280px">
+    <div class="row m-3">
+        <div class="col-sm-2">
+            <div class="position-fixed">
+                <a href="#" class="btn btn-default font-weight-bold mb-1 mt-1" style="background-color: #f8f9fa;" onclick="dispc(this)" id="tmu">Timeline</a><br/>
+                <a href="#" class="btn btn-default font-weight-bold mb-1 mt-1" onclick="dispc(this)" id="abtu">About</a><br/>
+                <a href="#" class="btn btn-default font-weight-bold mb-1 mt-1" onclick="dispc(this)" id="frndu">Friends ({{ cf }})</a><br/>
+                <a href="#" class="btn btn-default font-weight-bold mb-1 mt-1" onclick="dispc(this)" id="pstu">Your Posts</a><br/>
+            </div>
+        </div>
+        <div class="col-sm-10">
+            <div id="div_tmu" style="display: block;">
+                {% for i in range(20) %}
+                    <div class="media m-2 border rounded dbox" id="div_{{ i }}">
+                        <img src="{{ url_for('static',filename=data.prflpic) }}" style="border-radius: 50%;" height="100" width="100" class="img-fluid mr-5">
+                        <div class="media-body rounded">
+                            <h5>{{ data.username }}</h5>
+                            <p>
+                                The rose is a flower of love.
+                                The world has acclaimed it for centuries. Pink roses are for love hopeful and expectant.
+                                White roses are for love dead or forsaken, but the red roses, ah the red roses are for love triumphant.
+                            </p>
+                            <br/>
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <button type="button" id="btn_{{ i }}" class="btn btn-primary" onclick="liked({{ i }})" value="LIKE">LIKE</button>
+                                </div>
+                                <div class="col-sm-4">
+                                    <button type="button" class="btn btn-primary" value="COMMENT">COMMENT</button>
+                                </div>
+                                <div class="col-sm-4">
+                                    <button type="button" class="btn btn-primary" value="SHARE">SHARE</button>
+                                </div>
+                            </div>
+                            <br/>
+                            <div class="media">
+                            <img src="{{ url_for('static',filename=data.prflpic) }}" style="border-radius: 50%;" height="50px" width="50px" class="img-fluid mr-5">
+                            <div class="media-body mb-2 float-right">
+                                <h5>{{ data.username }}</h5>
+                                <form class="form-check-inline my-2 my-lg-0 ml-auto">
+                                    <input class="form-control text-center"  type="text">
+                                    <button class="btn btn-primary" type="button">COMMENT</button>
+                                </form>
+                            </div>
+                        </div>
+                        </div>
+
+                    </div>
+                        <br/>
+                    {% endfor %}
+            </div>
+            <div id="div_abtu" style="display: none">
+                <h2 class="text-center">About {{ data.name }}</h2>
+                <div class="bg-light text-danger rounded font-weight-bold">
+                    <div class="row m-2">
+                        <div class="col-sm-6">
+                            Name :
+                        </div>
+                        <div class="col-sm-6">
+                            {{ data.name }}
+                        </div>
+                    </div>
+                    <div class="row  m-2">
+                        <div class="col-sm-6">
+                            Rollno :
+                        </div>
+                        <div class="col-sm-6">
+                            {{ data.rno }}
+                        </div>
+                    </div>
+                    <div class="row  m-2">
+                        <div class="col-sm-6">
+                            Gender :
+                        </div>
+                        <div class="col-sm-6">
+                            {{ data.sex }}
+                        </div>
+                    </div>
+                    <div class="row m-2">
+                        <div class="col-sm-6">
+                            Age :
+                        </div>
+                        <div class="col-sm-6">
+                            {{ data.age }} Years
+                        </div>
+                    </div>
+                    <div class="row m-2">
+                        <div class="col-sm-6">
+                            Branch :
+                        </div>
+                        <div class="col-sm-6">
+                            {{ data.branch }}
+                        </div>
+                    </div>
+                    <div class="row m-2">
+                        <div class="col-sm-6">
+                            Year :
+                        </div>
+                        <div class="col-sm-6">
+                            {{ data.year }}
+                        </div>
+                    </div>
+                    <div class="row m-2">
+                        <div class="col-sm-6">
+                            Username :
+                        </div>
+                        <div class="col-sm-6">
+                            {{ data.username }}
+                        </div>
+                    </div>
+                    <div class="row m-2">
+                        <div class="col-sm-6">
+                            Email :
+                        </div>
+                        <div class="col-sm-6">
+                            {{ data.email }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="div_frndu" style="display: none">
+                    <div class="row">
+                        <div class="col-lg-12 cbox">
+                            <div class="row">
+                                {% for d in fd %}
+                                        <div class="media m-2" style="width: 100%">
+                                            <img src="{{ url_for('static',filename=d.prflpic) }}" height="100" width="100" class="img-fluid mr-5" style="border-radius: 50%;">
+                                            <div class="media-body">
+                                                <h5>{{ d.username }}</h5>
+                                                <button onclick="window.location.href='{{ url_for('oprofile',rno=data.rno,orno=d.rno) }}'" type="button" class="btn btn-primary">View</button>
+                                                <button onclick="window.location.href='{{ url_for('delr',rno=data.rno,orno=d.rno,task="unf") }}'" type="button" class="btn btn-primary">Unfriend</button>
+                                            </div>
+                                        </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+            </div>
+            <div id="div_pstu">
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+<script type="text/javascript" src="{{ url_for('static' ,filename='js/popper.js')}}"></script>
+<script type="text/javascript" src="{{ url_for('static' ,filename='js/jquery.js')}}"></script>
+<script type="text/javascript" src="{{ url_for('static' ,filename='js/bootstrap.min.js')}}"></script>
+</body>
+</html>
