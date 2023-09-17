@@ -27,19 +27,23 @@ def retb(k):
         return 'Chemical Engineering'
 
 
-engine = create_engine('sqlite:////home/imsoftkid/bietcoders/userdb.db',connect_args={'check_same_thread': False})
+# For the user database
+engine = create_engine('sqlite:///userdb.db', connect_args={'check_same_thread': False})
 Base.metadata.bind = engine
 DBSession = sessionmaker(bind=engine)
 
-fengine = create_engine('sqlite:////home/imsoftkid/bietcoders/friendsdb.db',connect_args={'check_same_thread': False})
-Base.metadata.bind =fengine
+# For the friends database
+fengine = create_engine('sqlite:///friendsdb.db', connect_args={'check_same_thread': False})
+Base.metadata.bind = fengine
 FSession = sessionmaker(bind=fengine)
 
-mengine = create_engine('sqlite:////home/imsoftkid/bietcoders/messagesdb.db',connect_args={'check_same_thread': False})
-Base.metadata.bind =mengine
+# For the messages database
+mengine = create_engine('sqlite:///messagesdb.db', connect_args={'check_same_thread': False})
+Base.metadata.bind = mengine
 MSession = sessionmaker(bind=mengine)
 
-app = Flask(__name__,template_folder='/home/imsoftkid/bietcoders/templates')
+
+app = Flask(__name__,template_folder='./templates')
 app.debug = True
 app.secret_key = os.urandom(12)
 
